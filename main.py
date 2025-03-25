@@ -15,6 +15,15 @@ PIN_IN2 = 8
 PIN_IN3 = 14
 PIN_IN4 = 15
 
+#各ピンを出力ピンに設定
+GPIO.setup(PIN_LARGE, GPIO.OUT, initial = GPIO.LOW)
+GPIO.setup(PIN_MODE, GPIO.OUT, initial = GPIO.LOW)
+
+GPIO.setup(PIN_IN1, GPIO.OUT, initial = GPIO.LOW)
+GPIO.setup(PIN_IN2, GPIO.OUT, initial = GPIO.LOW)
+GPIO.setup(PIN_IN3, GPIO.OUT, initial = GPIO.LOW)
+GPIO.setup(PIN_IN4, GPIO.OUT, initial = GPIO.LOW)
+
 def func_forward():
     GPIO.output(PIN_IN1, GPIO.HIGH)
     GPIO.output(PIN_IN2, GPIO.LOW)
