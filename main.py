@@ -9,9 +9,10 @@ GPIO.setmode(GPIO.BOARD)
 #使用するピン番号を代入
 PIN_LARGE = 16 # GPIO23
 PIN_MODE = 18 # GPIO24
+PIN_STBY = 7 # GPIO4
 
-PIN_IN1 = 26 # GPIO8
-PIN_IN2 = 24 # GPIO7
+PIN_IN1 = 26 # GPIO7
+PIN_IN2 = 24 # GPIO8
 PIN_IN3 = 8 # GPIO14
 PIN_IN4 = 10 # GPIO15
 
@@ -19,7 +20,8 @@ PIN_IN4 = 10 # GPIO15
 print("setting up GPIO...")
 
 GPIO.setup(PIN_LARGE, GPIO.OUT, initial = GPIO.LOW)
-GPIO.setup(PIN_MODE, GPIO.OUT, initial = GPIO.LOW)
+GPIO.setup(PIN_MODE, GPIO.OUT, initial = GPIO.HIGH)
+GPIO.setup(PIN_STBY, GPIO.OUT, initial = GPIO.HIGH)
 
 GPIO.setup(PIN_IN1, GPIO.OUT, initial = GPIO.LOW)
 GPIO.setup(PIN_IN2, GPIO.OUT, initial = GPIO.LOW)
@@ -29,22 +31,25 @@ GPIO.setup(PIN_IN4, GPIO.OUT, initial = GPIO.LOW)
 print("finished setting up GPIO")
 
 def func_forward():
+    print("forward")
+    GPIO.output(PIN_IN1, GPIO.HIGH)
+    GPIO.output(PIN_IN2, GPIO.HIGH)
+    GPIO.output(PIN_IN3, GPIO.HIGH)
+    GPIO.output(PIN_IN4, GPIO.HIGH)
+
+def func_back():
+    print("back")
     GPIO.output(PIN_IN1, GPIO.HIGH)
     GPIO.output(PIN_IN2, GPIO.LOW)
     GPIO.output(PIN_IN3, GPIO.HIGH)
     GPIO.output(PIN_IN4, GPIO.LOW)
 
-def func_back():
-    GPIO.output(PIN_IN1, GPIO.LOW)
-    GPIO.output(PIN_IN2, GPIO.HIGH)
-    GPIO.output(PIN_IN3, GPIO.LOW)
-    GPIO.output(PIN_IN4, GPIO.HIGH)
-
 def func_brake():
-    GPIO.output(PIN_IN1, GPIO.HIGH)
-    GPIO.output(PIN_IN2, GPIO.HIGH)
-    GPIO.output(PIN_IN3, GPIO.HIGH)
-    GPIO.output(PIN_IN4, GPIO.HIGH)
+    print("brake")
+    GPIO.output(PIN_IN1, GPIO.LOW)
+    GPIO.output(PIN_IN2, GPIO.LOW)
+    GPIO.output(PIN_IN3, GPIO.LOW)
+    GPIO.output(PIN_IN4, GPIO.LOW)
 
 while True:
     #3秒前進する
